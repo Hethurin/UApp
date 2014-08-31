@@ -25,9 +25,9 @@ class UWindow(Gtk.Window):
         passport_country_combo.set_entry_text_column(0)
         for country in ulibrary.countries:
             passport_country_combo.append_text(country)
-       
+
         passport_gender_combo = Gtk.ComboBoxText()
-        passport_gender_combo.set_entry.text_column(0)
+        passport_gender_combo.set_entry_text_column(0)
         for gender in ulibrary.genders:
             passport_gender_combo.append_text(gender)
 
@@ -37,7 +37,7 @@ class UWindow(Gtk.Window):
         passport_serial_entry = Gtk.Entry()
 
         grid.attach(no_passport, 0, 0, 2, 1)
-        grid.attach(passport_country_label(0, 1, 1, 1)
+        grid.attach(passport_country_label, 0, 1, 1, 1)
         grid.attach_next_to(passport_name_label, passport_country_label, Gtk.Position.BOTTOM, 1, 1)
         grid.attach_next_to(passport_gender_label, passport_name_label, Gtk.Position.BOTTOM, 1, 1)
         grid.attach_next_to(passport_isscity_label, passport_gender_label, Gtk.Position.BOTTOM, 1, 1)
@@ -49,4 +49,4 @@ class UWindow(Gtk.Window):
         grid.attach_next_to(passport_gender_combo, passport_gender_label, Gtk.Position.RIGHT, 1, 1)
         grid.attach_next_to(passport_isscity_entry, passport_isscity_label, Gtk.Position.RIGHT, 1, 1)
         grid.attach_next_to(passport_expdate_entry, passport_expdate_label, Gtk.Position.RIGHT, 1, 1)
-        grid.attach_next_to(passport_serial_entry, passport_serial_lavel, Gtk.Position.RIGHT, 1, 1)
+        grid.attach_next_to(passport_serial_entry, passport_serial_label, Gtk.Position.RIGHT, 1, 1)
