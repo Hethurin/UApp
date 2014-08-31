@@ -4,14 +4,14 @@ from collections import namedtuple
 
 """Document constants"""
 countries = ["Mordor", "Gondor", "Lorien", "Shire"]
-gender = ["male", "female"]
+genders = ["Male", "Female"]
 cities = {
-    'Mordor': 'Minas Morgul, Barad Dur',
-    'Gondor': 'Minas Tirith, Isengard, Osgiliath',
+    'Mordor': 'Minas Morgul,Barad Dur',
+    'Gondor': 'Minas Tirith,Isengard,Osgiliath',
     'Lorien': 'Lorien',
-    'Shire': 'Hobbiton, Waymeet, Frogmorton, Tuckborough'
+    'Shire': 'Hobbiton,Waymeet,Frogmorton,Tuckborough'
     }
-purpose = ["visit", "transit", "work", "immigrate"]
+purpose = ["Visit", "Transit", "Work", "Immigrate"]
 
 """Store user input here"""
 UPassport = namedtuple("UPassport", "country name gender isscity expdate serial")
