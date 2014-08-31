@@ -9,6 +9,8 @@ class UWindow(Gtk.Window):
         Gtk.Window.__init__(self, title="Useless passport validator")
 
         grid = Gtk.Grid()
+        grid.set_column_spacing(10)
+        grid.set_row_spacing(5)
         self.add(grid)
 
         """Passport column"""
@@ -69,7 +71,7 @@ class UWindow(Gtk.Window):
             pass_gender_combo.append_text(gender)
 
         pass_purpose_combo = Gtk.ComboBoxText()
-        pass_purpose_combo = Gtk.ComboBoxText()
+        pass_purpose_combo.set_entry_text_column(0)
         for purpose in ulibrary.purposes:
             pass_purpose_combo.append_text(purpose)
 
@@ -92,3 +94,55 @@ class UWindow(Gtk.Window):
         grid.attach_next_to(pass_duration_entry, pass_duration_label, Gtk.PositionType.RIGHT, 1, 1)
         grid.attach_next_to(pass_serial_entry, pass_serial_label, Gtk.PositionType.RIGHT, 1, 1)
         grid.attach_next_to(pass_expires_entry, pass_expires_label, Gtk.PositionType.RIGHT, 1, 1)
+
+        """Work visa column"""
+        work_visa_name_label = Gtk.Label("Name")
+        work_visa_proff_label = Gtk.Label("Proff.")
+        work_visa_duration_label = Gtk.Label("Duration")
+        work_visa_expires_label = Gtk.Label("Expires")
+
+        no_work_visa = Gtk.CheckButton("No work visa")
+        no_work_visa.set_active(False)
+
+        work_visa_name_entry = Gtk.Entry()
+        work_visa_proff_entry = Gtk.Entry()
+        work_visa_duration_entry = Gtk.Entry()
+        work_visa_expires_entry = Gtk.Entry()
+
+        grid.attach_next_to(no_work_visa, no_pass, Gtk.PositionType.RIGHT, 2, 1)
+        grid.attach_next_to(work_visa_name_label, pass_name_entry, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(work_visa_proff_label, pass_gender_combo, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(work_visa_duration_label, pass_purpose_combo, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(work_visa_expires_label, pass_duration_entry, Gtk.PositionType.RIGHT, 1, 1)
+ 
+        grid.attach_next_to(work_visa_name_entry, work_visa_name_label, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(work_visa_proff_entry, work_visa_proff_label, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(work_visa_duration_entry, work_visa_duration_label, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(work_visa_expires_entry, work_visa_expires_label, Gtk.PositionType.RIGHT, 1, 1)
+
+        """Record column"""
+        record_purpose_label = Gtk.Label("Purpose")
+        record_duration_label = Gtk.Label("Duration")
+
+        said_nothing = Gtk.CheckButton("Was silent")
+        said_nothing.set_active(False)
+
+        record_purpose_combo = Gtk.ComboBoxText()
+        record_purpose_combo.set_entry_text_column(0)
+        for purpose in ulibrary.purposes:
+            record_purpose_combo.append_text(purpose)
+
+        record_duration_entry = Gtk.Entry()
+
+        grid.attach_next_to(said_nothing, no_work_visa, Gtk.PositionType.RIGHT, 2, 1)
+        grid.attach_next_to(record_purpose_label, work_visa_name_entry, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(record_duration_label, work_visa_proff_entry, Gtk.PositionType.RIGHT, 1, 1)
+
+        grid.attach_next_to(record_purpose_combo, record_purpose_label, Gtk.PositionType.RIGHT, 1, 1)
+        grid.attach_next_to(record_duration_entry, record_duration_label, Gtk.PositionType.RIGHT, 1, 1)
+
+        randomize = Gtk.Button("Randomize")
+        validate = Gtk.Button("Validate")
+
+        grid.attach(randomize, 6, 10, 1, 1)
+        grid.attach(validate, 7, 10, 1, 1)
