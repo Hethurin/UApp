@@ -14,7 +14,7 @@ def main():
     ulibrary.init()
 
     uwindow = UWindow()
-    uwindow.connect("delete-event", Gtk.main.quit)
+    uwindow.connect("delete-event", Gtk.main_quit)
     uwindow.show_all()
     Gtk.main()
 
