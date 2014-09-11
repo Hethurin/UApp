@@ -21,9 +21,6 @@ class UWindow(Gtk.Window):
         passport_expdate_label = Gtk.Label("Exp. Date")
         passport_serial_label = Gtk.Label("Serial")
 
-        no_passport = Gtk.CheckButton("No Passport")
-        no_passport.set_active(False)
-
         passport_country_combo = Gtk.ComboBoxText()
         passport_country_combo.set_entry_text_column(0)
         for country in ulibrary.countries:
@@ -38,6 +35,11 @@ class UWindow(Gtk.Window):
         passport_isscity_entry = Gtk.Entry()
         passport_expdate_entry = Gtk.Entry()
         passport_serial_entry = Gtk.Entry()
+
+        no_passport = Gtk.CheckButton("No Passport")
+        no_passport.set_active(False)
+        no_passport.connect("toggled", self.no_passport_toggled, passport_country_combo, passport_gender_combo,
+                passport_name_entry, passport_isscity_entry, passport_expdate_entry, passport_serial_entry)
 
         grid.attach(no_passport, 0, 0, 2, 1)
         grid.attach(passport_country_label, 0, 1, 1, 1)
@@ -146,3 +148,15 @@ class UWindow(Gtk.Window):
 
         grid.attach(randomize, 6, 10, 1, 1)
         grid.attach(validate, 7, 10, 1, 1)
+
+    """Functions"""
+    def no_passport_toggled(self, no_passport, passport_country, passport_gender, passport_name,
+            passport_isscity, passport_expdate, passport_serial):
+        is_sensitive = not no_passport.get_active()
+
+        passport_country.set_sensitive(is_sensitive)
+        passport_gender.set_sensitive(is_sensitive)
+        passport_name.set_sensitive(is_sensitive)
+        passport_isscity.set_sensitive(is_sensitive)
+        passport_expdate.set_sensitive(is_sensitive)
+        passport_serial.set_sensitive(is_sensitive)
