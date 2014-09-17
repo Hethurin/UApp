@@ -64,9 +64,6 @@ class UWindow(Gtk.Window):
         pass_serial_label = Gtk.Label("Serial")
         pass_expires_label = Gtk.Label("Expires")
 
-        no_pass = Gtk.CheckButton("No entry pass")
-        no_pass.set_active(False)
-
         pass_gender_combo = Gtk.ComboBoxText()
         pass_gender_combo.set_entry_text_column(0)
         for gender in ulibrary.genders:
@@ -81,6 +78,11 @@ class UWindow(Gtk.Window):
         pass_duration_entry = Gtk.Entry()
         pass_serial_entry = Gtk.Entry()
         pass_expires_entry = Gtk.Entry()
+
+        no_pass = Gtk.CheckButton("No entry pass")
+        no_pass.set_active(False)
+        no_pass.connect("toggled", self.no_pass_toggled, pass_gender_combo, pass_purpose_combo,
+                pass_name_entry, pass_duration_entry, pass_serial_entry, pass_expires_entry)
 
         grid.attach_next_to(no_pass, no_passport, Gtk.PositionType.RIGHT, 2, 1)
         grid.attach_next_to(pass_name_label, passport_country_combo, Gtk.PositionType.RIGHT, 1, 1)
@@ -103,13 +105,15 @@ class UWindow(Gtk.Window):
         work_visa_duration_label = Gtk.Label("Duration")
         work_visa_expires_label = Gtk.Label("Expires")
 
-        no_work_visa = Gtk.CheckButton("No work visa")
-        no_work_visa.set_active(False)
-
         work_visa_name_entry = Gtk.Entry()
         work_visa_proff_entry = Gtk.Entry()
         work_visa_duration_entry = Gtk.Entry()
         work_visa_expires_entry = Gtk.Entry()
+
+        no_work_visa = Gtk.CheckButton("No work visa")
+        no_work_visa.set_active(False)
+        no_work_visa.connect("toggled", self.no_work_visa_toggled, work_visa_name_entry,
+                work_visa_proff_entry, work_visa_duration_entry, work_visa_expires_entry)
 
         grid.attach_next_to(no_work_visa, no_pass, Gtk.PositionType.RIGHT, 2, 1)
         grid.attach_next_to(work_visa_name_label, pass_name_entry, Gtk.PositionType.RIGHT, 1, 1)
@@ -126,15 +130,16 @@ class UWindow(Gtk.Window):
         record_purpose_label = Gtk.Label("Purpose")
         record_duration_label = Gtk.Label("Duration")
 
-        said_nothing = Gtk.CheckButton("Was silent")
-        said_nothing.set_active(False)
-
         record_purpose_combo = Gtk.ComboBoxText()
         record_purpose_combo.set_entry_text_column(0)
         for purpose in ulibrary.purposes:
             record_purpose_combo.append_text(purpose)
 
         record_duration_entry = Gtk.Entry()
+
+        said_nothing = Gtk.CheckButton("Was silent")
+        said_nothing.set_active(False)
+        said_nothing.connect("toggled", self.said_nothing_toggled, record_purpose_combo, record_duration_entry)
 
         grid.attach_next_to(said_nothing, no_work_visa, Gtk.PositionType.RIGHT, 2, 1)
         grid.attach_next_to(record_purpose_label, work_visa_name_entry, Gtk.PositionType.RIGHT, 1, 1)
@@ -160,3 +165,29 @@ class UWindow(Gtk.Window):
         passport_isscity.set_sensitive(is_sensitive)
         passport_expdate.set_sensitive(is_sensitive)
         passport_serial.set_sensitive(is_sensitive)
+
+    def no_pass_toggled(self, no_pass, pass_gender, pass_purpose, pass_name,
+            pass_duration, pass_serial, pass_expires):
+        is_sensitive = not no_pass.get_active()
+
+        pass_gender.set_sensitive(is_sensitive)
+        pass_purpose.set_sensitive(is_sensitive)
+        pass_name.set_sensitive(is_sensitive)
+        pass_duration.set_sensitive(is_sensitive)
+        pass_serial.set_sensitive(is_sensitive)
+        pass_expires.set_sensitive(is_sensitive)
+
+    def no_work_visa_toggled(self, no_work_visa, work_name, work_proff,
+            work_duration, work_expires):
+        is_sensitive = not no_work_visa.get_active()
+
+        work_name.set_sensitive(is_sensitive)
+        work_proff.set_sensitive(is_sensitive)
+        work_duration.set_sensitive(is_sensitive)
+        work_expires.set_sensitive(is_sensitive)
+
+    def said_nothing_toggled(self, said_nothing, purpose, duration):
+        is_sensitive = not said_nothing.get_active()
+
+        purpose.set_sensitive(is_sensitive)
+        duration.set_sensitive(is_sensitive)
